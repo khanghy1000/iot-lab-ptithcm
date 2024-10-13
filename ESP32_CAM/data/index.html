@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Face Mask Detector</title>
+        <link rel="stylesheet" href="lib/pico.css" />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <header style="text-align: center">
+            <h1>Face Mask Detector</h1>
+            <h4>Nguyễn Khang Hy - N21DCCN131</h4>
+        </header>
+        <main>
+            <div class="grid">
+                <form>
+                    <fieldset>
+                        <label
+                            >Kind
+                            <select name="kind">
+                                <option>Image</option>
+                                <option>Pose</option>
+                            </select>
+                        </label>
+
+                        <label>
+                            Flash
+                            <input
+                                name="flash"
+                                type="range"
+                                min="0"
+                                max="255"
+                                value="0"
+                            />
+                        </label>
+
+                        <label>
+                            Quality
+                            <input
+                                name="quality"
+                                type="range"
+                                min="13"
+                                max="63"
+                                value="13"
+                            />
+                        </label>
+
+                        <label>
+                            Brightness
+                            <input
+                                name="brightness"
+                                type="range"
+                                min="-2"
+                                max="2"
+                                value="0"
+                            />
+                        </label>
+
+                        <label>
+                            Contrast
+                            <input
+                                name="contrast"
+                                type="range"
+                                min="-2"
+                                max="2"
+                                value="0"
+                            />
+                        </label>
+
+                        <label>
+                            H-Mirror
+                            <input
+                                name="h-mirror"
+                                type="checkbox"
+                                role="switch"
+                            />
+                        </label>
+
+                        <label>
+                            V-Flip
+                            <input
+                                name="v-flip"
+                                type="checkbox"
+                                role="switch"
+                            />
+                        </label>
+                    </fieldset>
+                </form>
+                <article>
+                    <img
+                        id="stream"
+                        src="http://192.168.10.113/stream"
+                        alt="stream"
+                    />
+                </article>
+            </div>
+        </main>
+    </body>
+</html>
