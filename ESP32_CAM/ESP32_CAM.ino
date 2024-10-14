@@ -26,6 +26,8 @@ void setup(void) {
   setupWifi();
   setupCamera();
   setupLittleFS();
+  
+  server.enableCORS();
 
   server.serveStatic("/", LittleFS, "/index.html");
 

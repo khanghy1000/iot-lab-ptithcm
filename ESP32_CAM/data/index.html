@@ -6,6 +6,9 @@
         <title>Face Mask Detector</title>
         <link rel="stylesheet" href="lib/pico.css" />
         <link rel="stylesheet" href="style.css" />
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.3/dist/teachablemachine-image.min.js"></script>
+        <script src="js/index.js" defer></script>
     </head>
     <body>
         <header style="text-align: center">
@@ -19,8 +22,8 @@
                         <label
                             >Kind
                             <select name="kind">
-                                <option>Image</option>
-                                <option>Pose</option>
+                                <option value="image">Image</option>
+                                <option value="pose">Pose</option>
                             </select>
                         </label>
 
@@ -86,14 +89,18 @@
                             />
                         </label>
                     </fieldset>
+                    <article id="result">Loading...</article>
                 </form>
-                <article>
-                    <img
-                        id="stream"
-                        src="http://192.168.10.113/stream"
-                        alt="stream"
-                    />
-                </article>
+                <div id="stream-div">
+                    <article id="stream-card">
+                        <img id="stream" alt="stream" crossorigin="anonymous" />
+                    </article>
+
+                    <div role="group" id="btn-group">
+                        <button>Get still</button>
+                        <button type="reset">Reset</button>
+                    </div>
+                </div>
             </div>
         </main>
     </body>

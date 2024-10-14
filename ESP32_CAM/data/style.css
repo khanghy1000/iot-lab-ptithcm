@@ -1,13 +1,9 @@
 :root {
-    --pico-font-size: 16px;
-}
-
-form {
-    padding: 30px;
+    --pico-font-size: 14px;
 }
 
 .grid {
-    gap: 50px;
+    gap: 70px;
 }
 
 main {
@@ -19,9 +15,19 @@ main {
   width: 100%;
 }
 
-article {
+#stream-card {
   display: flex;
   align-items: center;
   justify-content: center;
   height: fit-content;
+}
+
+main {
+  padding: 50px 150px;
+}
+
+@media (max-width: 950px) {
+  main {
+    padding: 30px 30px;
+  }
 }

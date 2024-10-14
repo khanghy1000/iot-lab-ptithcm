@@ -51,8 +51,8 @@ void setupCamera() {
     return;
   }
 
-  sensor_t* s = esp_camera_sensor_get();
-  s->set_framesize(s, FRAMESIZE_QVGA);  //UXGA|SXGA|XGA|SVGA|VGA|CIF|QVGA|HQVGA|QQVGA
+  //sensor_t* s = esp_camera_sensor_get();
+  //s->set_framesize(s, FRAMESIZE_QVGA);  //UXGA|SXGA|XGA|SVGA|VGA|CIF|QVGA|HQVGA|QQVGA
 
   // cameraSetupCompleted = true;
   Serial.println("Camera setup completed successfully.");
