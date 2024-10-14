@@ -132,3 +132,28 @@ void handleFlip() {
   s->set_vflip(s, flip);
   server.send(200, "text/plain", "Success");
 }
+
+void handleTelegramMaskDetection() {
+  String value = server.arg("value");
+
+  if (value == "No one here") {
+    sendPhotoTelegram();
+    bot.sendMessage(CHAT_ID, "Không có người\n");
+  }
+  if (value == "No mask") {
+    sendPhotoTelegram();
+    bot.sendMessage(CHAT_ID, "Không đeo khẩu trang\n");
+  }
+  if (value == "Mask") {
+    sendPhotoTelegram();
+    bot.sendMessage(CHAT_ID, "Đeo khẩu trang an toàn\n");
+  }
+
+  if (value == "Unrecognizable") {
+    sendPhotoTelegram();
+    bot.sendMessage(CHAT_ID, "Lỗi nhận diện\n");
+  }
+
+  sendPhoto = false;
+  server.send(200, "text/plain", "Success");
+}
