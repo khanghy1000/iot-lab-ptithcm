@@ -15,6 +15,8 @@
 ### Libraries
 
 [Micro-RTSP](https://github.com/geeksville/Micro-RTSP)
+[Universal Telegram Bot Library](https://github.com/witnessmenow/Universal-Arduino-Telegram-Bot)
+[ArduinoJson](https://github.com/bblanchon/ArduinoJson)
 
 **Lưu ý:** Dùng LittleFS uploader để load static files trong thư mục **data** trước khi flash code (Đóng cửa sổ Serial Monitor trước khi load)
 
