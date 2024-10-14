@@ -11,23 +11,31 @@ main {
 }
 
 #stream {
-  display: block;
-  width: 100%;
+    display: block;
+    width: 100%;
 }
 
 #stream-card {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
 }
 
 main {
-  padding: 50px 150px;
+    padding: 50px 150px;
 }
 
 @media (max-width: 950px) {
-  main {
-    padding: 30px 30px;
-  }
+    main {
+        padding: 30px 30px;
+    }
+}
+
+.text-pink {
+    color: #d92662;
+}
+
+.text-indigo {
+    color: #655cd6;
 }
