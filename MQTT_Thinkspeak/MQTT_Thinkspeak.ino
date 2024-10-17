@@ -56,6 +56,7 @@ void setup() {
 void onConnectionEstablished() {
   Serial.println("MQTT connected");
 
+  server.enableCORS(true);
   server.on("/stats", HTTP_GET, handleGetStats);
   server.on("/min-temp-warn", HTTP_POST, handleTempWarn);
   server.on("/min-hum-warn", HTTP_POST, handleHumWarn);

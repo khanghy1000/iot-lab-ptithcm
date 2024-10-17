@@ -46,6 +46,7 @@ void setup(void) {
 
   server.serveStatic("/", LittleFS, "/index.html");
 
+  server.enableCORS(true);
   server.on("/stream", HTTP_GET, handleJpgStream);
   server.on("/jpg", HTTP_GET, handleJpg);
   server.on("/resolution", HTTP_POST, handleResolution);
