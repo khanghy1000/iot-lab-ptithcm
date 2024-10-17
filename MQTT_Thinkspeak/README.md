@@ -13,3 +13,5 @@
 [DHT sensor library](https://github.com/adafruit/DHT-sensor-library)
 
 [EspMQTTClient](https://github.com/plapointe6/EspMQTTClient)
+
+[ArduinoJson](https://github.com/bblanchon/ArduinoJson)
