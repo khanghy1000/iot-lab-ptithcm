@@ -5,6 +5,8 @@ import { clear } from 'console';
 
 const app = express();
 
+const esp8266Url = 'http://192.168.10.142';
+
 const db = knex({
   client: 'pg',
   connection: {
@@ -15,30 +17,17 @@ const db = knex({
   },
 });
 
-const esp8266Url = 'http://192.168.10.142';
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
 
 async function fetchStats() {
-  const response = await fetch(esp8266Url + '/stats');
-  const stats = await response.json();
-  return stats;
-}
-
-type Stats = {
-  temperature: number;
-  humidity: number;
-};
-
-setInterval(async () => {
   let stats: Stats;
   try {
-    stats = await fetchStats();
+    const response = await fetch(esp8266Url + '/stats');
+    stats = await response.json();
   } catch (err) {
     console.error('Failed to fetch stats');
-    console.log(err);
     return;
   }
 
@@ -51,7 +40,14 @@ setInterval(async () => {
     console.log(err);
     return;
   }
-}, 10000);
+}
+
+type Stats = {
+  temperature: number;
+  humidity: number;
+};
+
+setInterval(async () => {}, 10000);
 
 app.listen(3000, () => {
   console.log('Listening on http://localhost:3000');
