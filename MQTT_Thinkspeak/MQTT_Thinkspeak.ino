@@ -39,9 +39,12 @@ unsigned long greenLedDelayTime = 1000;
 bool greenLed = false;
 
 int minTempWarn = 40;
-
-int minHumWatering = 60;
 int minHumWarn = 85;
+
+int enableWatering = false;
+int minTempWatering = 30;
+int minHumWatering = 60;
+
 
 String publishUrl = String("channels/" + String(CHANNEL_ID) + "/publish");
 
@@ -58,9 +61,10 @@ void onConnectionEstablished() {
 
   server.enableCORS(true);
   server.on("/stats", HTTP_GET, handleGetStats);
-  server.on("/min-temp-warn", HTTP_POST, handleTempWarn);
-  server.on("/min-hum-warn", HTTP_POST, handleHumWarn);
-  server.on("/min-hum-watering", HTTP_POST, handleHumWatering);
+  server.on("/settings", HTTP_GET, handleGetSettings);
+  server.on("/settings/min-temp-warn", HTTP_POST, handleSetTempWarn);
+  server.on("/settings/min-hum-warn", HTTP_POST, handleSetHumWarn);
+  server.on("/settings/watering", HTTP_POST, handleSetWatering);
   server.onNotFound(handleNotFound);
 
   server.begin();
@@ -70,6 +74,7 @@ void onConnectionEstablished() {
 }
 
 void loop() {
+  // Temp warn
   if (millis() - buzzerLastTime >= buzzerDelayTime) {
     float temperature = dht.readTemperature();
     if (temperature >= minTempWarn) {
@@ -82,6 +87,7 @@ void loop() {
     buzzerLastTime = millis();
   }
 
+  // Hum warn
   if (millis() - redLedLastTime >= redLedDelayTime) {
     float humidity = dht.readHumidity();
 
@@ -95,10 +101,12 @@ void loop() {
     redLedLastTime = millis();
   }
 
+  // Watering
   if (millis() - greenLedLastTime >= greenLedDelayTime) {
+    float temperature = dht.readTemperature();
     float humidity = dht.readHumidity();
 
-    if (humidity >= minHumWatering) {
+    if (enableWatering && humidity >= minHumWatering && temperature >= minTempWatering) {
       greenLed = !greenLed;
     } else {
       greenLed = false;

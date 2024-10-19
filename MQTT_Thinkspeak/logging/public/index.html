@@ -9,22 +9,46 @@
     <script src="index.js" defer></script>
   </head>
   <body>
-    <main>
-      <h4 style="text-align: center; margin-top: 20px">
+    <main style="max-width: 600px; margin: 10px auto; padding: 20px">
+      <h4 style="text-align: center; margin: 20px">
         Hệ thống tưới tiêu tự động - ESP8266
       </h4>
-      <article style="max-width: 600px; margin: 10px auto">
+
+      <article id="success">
+        <p>Lưu thành công</p>
+      </article>
+
+      <article id="failed">
+        <p>Lưu thất bại</p>
+      </article>
+
+      <article>
         <fieldset>
           <label>
-            Tự động tưới cây khi độ ẩm lớn hơn hoặc bằng:
-            <div role="group">
-              <input name="min-hum-watering" type="number" />
-              <button id="btn-hum-watering">Lưu</button>
-            </div>
+            Tự động tưới cây
+            <input type="checkbox" name="enable-watering" />
           </label>
 
-          <hr />
+          <div id="watering-div" style="display: none">
+            <label>
+              Tự động tưới cây khi <b>nhiệt độ</b> lớn hơn hoặc bằng:
+              <input name="min-temp-watering" type="number" />
+            </label>
 
+            <label>
+              Tự động tưới cây khi <b>độ ẩm</b> lớn hơn hoặc bằng:
+              <input name="min-hum-watering" type="number" />
+            </label>
+          </div>
+
+          <button id="btn-watering" style="display: block; margin: 10px auto">
+            Lưu
+          </button>
+        </fieldset>
+      </article>
+
+      <article>
+        <fieldset>
           <label>
             Cảnh báo khi nhiệt độ lớn hơn hoặc bằng:
             <div role="group">

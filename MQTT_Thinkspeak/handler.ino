@@ -19,21 +19,46 @@ void handleGetStats() {
   server.send(200, "application/json", serializedResult);
 }
 
-void handleTempWarn() {
+void handleGetSettings() {
+  JsonDocument result;
+  result["minTempWarn"] = minTempWarn;
+  result["minHumWarn"] = minHumWarn;
+  result["enableWatering"] = enableWatering;
+  result["minTempWatering"] = minTempWatering;
+  result["minHumWatering"] = minHumWatering;
+
+  String serializedResult;
+  serializeJson(result, serializedResult);
+
+  server.send(200, "application/json", serializedResult);
+}
+
+void handleSetTempWarn() {
   String value = server.arg("value");
   minTempWarn = value.toFloat();
+  Serial.println(String("Set minTempWarn = " + String(minTempWarn)));
   server.send(200, "text/plain", "Success");
 }
 
-void handleHumWarn() {
+void handleSetHumWarn() {
   String value = server.arg("value");
   minHumWarn = value.toFloat();
+  Serial.println(String("Set minHumWarn = " + String(minHumWarn)));
   server.send(200, "text/plain", "Success");
 }
 
-void handleHumWatering() {
-  String value = server.arg("value");
-  minHumWatering = value.toFloat();
+void handleSetWatering() {
+  String reqEnableWatering = server.arg("enableWatering");
+  String reqMinTempWatering = server.arg("minTempWatering");
+  String reqMinHumWatering = server.arg("minHumWatering");
+
+  enableWatering = reqEnableWatering == "true";
+  minTempWatering = reqMinTempWatering.toFloat();
+  minHumWatering = reqMinHumWatering.toFloat();
+
+  Serial.println(String("Set enableWatering = " + String(enableWatering)));
+  Serial.println(String("Set minTempWatering = " + String(minTempWatering)));
+  Serial.println(String("Set minHumWatering = " + String(minHumWatering)));
   server.send(200, "text/plain", "Success");
 }
 

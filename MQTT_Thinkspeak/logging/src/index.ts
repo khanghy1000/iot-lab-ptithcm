@@ -21,6 +21,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
 
+type Stats = {
+  temperature: number;
+  humidity: number;
+};
+
 async function fetchStats() {
   let stats: Stats;
   try {
@@ -42,12 +47,7 @@ async function fetchStats() {
   }
 }
 
-type Stats = {
-  temperature: number;
-  humidity: number;
-};
-
-setInterval(async () => {}, 10000);
+setInterval(fetchStats, 10000);
 
 app.listen(3000, () => {
   console.log('Listening on http://localhost:3000');

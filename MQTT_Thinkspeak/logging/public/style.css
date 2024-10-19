@@ -1,3 +1,25 @@
 div[role='group'] {
   margin: 10px;
 }
+
+#success {
+  text-align: center;
+  border: 1px solid #4caf50;
+  display: none;
+}
+
+#success * {
+  color: #4caf50;
+  margin: 0px;
+}
+
+#failed {
+  text-align: center;
+  border: 1px solid #f44336;
+  display: none;
+}
+
+#failed * {
+  color: #f44336;
+  margin: 0px;
+}
