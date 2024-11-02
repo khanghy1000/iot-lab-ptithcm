@@ -1,124 +1,88 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Face Mask Detector</title>
-        <link rel="stylesheet" href="lib/pico.css" />
-        <link rel="stylesheet" href="style.css" />
-        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.3/dist/teachablemachine-image.min.js"></script>
-        <!-- <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8.3/dist/teachablemachine-pose.min.js"></script> -->
-        <script src="js/index.js" defer></script>
-    </head>
-    <body>
-        <header style="text-align: center">
-            <h1>Face Mask Detector</h1>
-            <h4>Nguyễn Khang Hy - N21DCCN131</h4>
-        </header>
-        <main>
-            <div class="grid">
-                <form>
-                    <fieldset>
-                        <!-- <label
-                            >Kind
-                            <select name="kind">
-                                <option value="image">Image</option>
-                                <option value="pose">Pose</option>
-                            </select>
-                        </label> -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Face Mask Detector</title>
+    <link rel="stylesheet" href="lib/pico.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.3/dist/teachablemachine-image.min.js"></script>
+    <script src="js/index.js" defer></script>
+  </head>
+  <body>
+    <header style="text-align: center">
+      <h1>Face Mask Detector</h1>
+      <h4>Nguyễn Khang Hy - N21DCCN131</h4>
+    </header>
+    <main>
+      <div class="grid">
+        <form>
+          <fieldset>
+            <label
+              >Resolution
+              <select name="resolution">
+                <option value="QQVGA">QQVGA</option>
+                <option value="HQVGA">HQVGA</option>
+                <option value="QVGA">QVGA</option>
+                <option value="CIF">CIF</option>
+                <option value="VGA" selected>VGA</option>
+                <option value="SVGA">SVGA</option>
+                <option value="XGA">XGA</option>
+                <option value="SXGA">SXGA</option>
+                <option value="UXGA">UXGA</option>
+              </select>
+            </label>
 
-                        <label
-                            >Resolution
-                            <select name="resolution">
-                                <option value="QQVGA">QQVGA</option>
-                                <option value="HQVGA">HQVGA</option>
-                                <option value="QVGA">QVGA</option>
-                                <option value="CIF">CIF</option>
-                                <option value="VGA" selected>VGA</option>
-                                <option value="SVGA">SVGA</option>
-                                <option value="XGA">XGA</option>
-                                <option value="SXGA">SXGA</option>
-                                <option value="UXGA">UXGA</option>
+            <label>
+              Flash
+              <input name="flash" type="range" min="0" max="255" value="0" />
+            </label>
 
-                            </select>
-                        </label>
+            <label>
+              Quality
+              <input name="quality" type="range" min="10" max="63" value="10" />
+            </label>
 
-                        <label>
-                            Flash
-                            <input
-                                name="flash"
-                                type="range"
-                                min="0"
-                                max="255"
-                                value="0"
-                            />
-                        </label>
+            <label>
+              Brightness
+              <input
+                name="brightness"
+                type="range"
+                min="-2"
+                max="2"
+                value="1"
+              />
+            </label>
 
-                        <label>
-                            Quality
-                            <input
-                                name="quality"
-                                type="range"
-                                min="10"
-                                max="63"
-                                value="10"
-                            />
-                        </label>
+            <label>
+              Contrast
+              <input name="contrast" type="range" min="-2" max="2" value="0" />
+            </label>
 
-                        <label>
-                            Brightness
-                            <input
-                                name="brightness"
-                                type="range"
-                                min="-2"
-                                max="2"
-                                value="1"
-                            />
-                        </label>
+            <label>
+              H-Mirror
+              <input name="h-mirror" type="checkbox" role="switch" />
+            </label>
 
-                        <label>
-                            Contrast
-                            <input
-                                name="contrast"
-                                type="range"
-                                min="-2"
-                                max="2"
-                                value="0"
-                            />
-                        </label>
+            <label>
+              V-Flip
+              <input name="v-flip" type="checkbox" role="switch" />
+            </label>
+          </fieldset>
+          <article id="result">Loading...</article>
+        </form>
+        <div id="stream-div">
+          <article id="stream-card">
+            <img id="stream" alt="stream" crossorigin="anonymous" />
+          </article>
 
-                        <label>
-                            H-Mirror
-                            <input
-                                name="h-mirror"
-                                type="checkbox"
-                                role="switch"
-                            />
-                        </label>
-
-                        <label>
-                            V-Flip
-                            <input
-                                name="v-flip"
-                                type="checkbox"
-                                role="switch"
-                            />
-                        </label>
-                    </fieldset>
-                    <article id="result">Loading...</article>
-                </form>
-                <div id="stream-div">
-                    <article id="stream-card">
-                        <img id="stream" alt="stream" crossorigin="anonymous" />
-                    </article>
-
-                    <div role="group" id="btn-group">
-                        <button id="btn-get-still">Get still</button>
-                        <button type="reset" id="btn-reset">Reset</button>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </body>
+          <div role="group" id="btn-group">
+            <button id="btn-get-still">Get still</button>
+            <button type="reset" id="btn-reset">Reset</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
 </html>
