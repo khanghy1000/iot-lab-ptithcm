@@ -53,7 +53,6 @@ async function predict() {
           maxProbability = prediction[i].probability;
         }
       }
-      // resultElement += `<p><span class="text-pink">${prediction[i].className}:</span> ${prediction[i].probability.toFixed(2)}</p>`;
       resultElement += `
         <p>
             <span class="text-blue">${prediction[i].className}: </span>
