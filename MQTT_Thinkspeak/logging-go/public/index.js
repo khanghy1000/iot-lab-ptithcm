@@ -20,7 +20,7 @@ const wateringSettingsDiv = document.querySelector("#watering-div");
 const successAlert = document.querySelector("#success");
 const failedAlert = document.querySelector("#failed");
 
-const esp8266Url = "http://192.168.10.143";
+const esp8266Url = "http://192.168.68.124";
 
 const hideAlert = () => {
   successAlert.style.display = "none";

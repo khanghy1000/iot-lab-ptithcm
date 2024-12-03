@@ -15,8 +15,8 @@
 #include <UniversalTelegramBot.h>
 #include <ArduinoJson.h>
 
-const char* ssid = "Lau3D12";
-const char* password = "dungtratien";
+const char* ssid = "Redmi 12R";
+const char* password = "khanghy100";
 
 String BOTtoken = "7757201687:AAHOXHP2iEueOgHXS1kAIaCXWPi_tWDZ4w8";
 String CHAT_ID = "788184350";
